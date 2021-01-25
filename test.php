@@ -10,10 +10,12 @@ $start = microtime(true);
 #Repeat x1000 db connections
 $i = 0;
 while($i < 1000){
+
     $database = new Database_Old();
     $db = $database->getConnection();
     $i ++;
-}
+
+    }
 
 $old_time_cal = microtime(true) - $start;
 
