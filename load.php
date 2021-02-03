@@ -6,7 +6,11 @@ define('ADMIN_SCRIPT_PATH', ADMIN_PATH.'/scripts');
 # Display Errors, DEBUG ONLY. Turn off in production env.
     ini_set('display_errors', 1);
 
-    # Anything that is a script should go here
-    require_once ABSPATH.'/config/database.php';
-    require_once ADMIN_SCRIPT_PATH.'/read.php';
-    require_once ADMIN_SCRIPT_PATH.'/login.php';
+# Start the session 
+session_start();
+
+# Anything that is a script should go here
+require_once ABSPATH.'/config/database.php';
+require_once ADMIN_SCRIPT_PATH.'/functions.php';
+require_once ADMIN_SCRIPT_PATH.'/read.php';
+require_once ADMIN_SCRIPT_PATH.'/login.php';
