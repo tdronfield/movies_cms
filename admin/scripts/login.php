@@ -7,8 +7,8 @@ function login($username, $password, $ip)
     // check against user DB to check credentials
     // Check if UN and PW match DB
     $pdo = Database::getInstance()->getConnection();
-    $get_user_querry = 'SELECT * FROM tbl_user WHERE user_name = :username AND user_pass=:password';
-    $user_set = $pdo->prepare($get_user_querry);
+    $get_user_query = 'SELECT * FROM tbl_user WHERE user_name = :username AND user_pass=:password';
+    $user_set = $pdo->prepare($get_user_query);
     $user_set->execute(
         array(
             ':username'=>$username,
