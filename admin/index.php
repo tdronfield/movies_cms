@@ -12,6 +12,8 @@ confirm_logged_in(); // Ensures only logged in users can access dashboard page
 <body>
     <h2>Welcome to the Dashboard Page, <?php echo $_SESSION['user_name'];?>!</h2>
 
+    <a href="admin_createuser.php">Create User</a>
     <a href="admin_logout.php">Log Out</a>
+
 </body>
 </html>
