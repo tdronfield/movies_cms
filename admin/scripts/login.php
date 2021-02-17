@@ -27,6 +27,7 @@ function login($username, $password, $ip)
         // Write user and id into session
         $_SESSION['user_id'] = $found_user_id;
         $_SESSION['user_name'] = $found_user['user_fname'];
+        $_SESSION['user_level'] = $found_user['user_level'];
         
 
         // Update user IP
@@ -48,10 +49,15 @@ function login($username, $password, $ip)
     }
 }
 
-function confirm_logged_in()
+function confirm_logged_in($admin_above_only=false)
 {
     if(!isset($_SESSION['user_id'])){
         redirect_to("admin_login.php");
+    }
+
+    if(!empty($admin_above_only) && empty($_SESSION['user_level'])){
+        // 0 (editor) returns empty
+        redirect_to("index.php");
     }
 }
 
