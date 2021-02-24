@@ -13,7 +13,7 @@ confirm_logged_in(); // Ensures only logged in users can access dashboard page
     <h2>Welcome to the Dashboard Page, <?php echo $_SESSION['user_name'];?>!</h2>
     <h3>You are in level: <?php echo getCurrentUserLevel();?>.</h3>
 
-    <?php if(!empty($_SESSION['user_level'])):?>
+    <?php if(isCurrentUserAdminAbove()):?>
         <a href="admin_createuser.php">Create User</a>
     <?php endif;?>
 
