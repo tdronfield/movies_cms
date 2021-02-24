@@ -54,3 +54,23 @@ function createUser($user_data)
         return 'The User Could Not Be Created';
     }
 }
+
+function getSingleUser($user_id){
+    ## Testing Line
+    # echo 'You are trying to fetch user: '.$user_id;
+    $pdo = Database::getInstance()->getConnection();
+
+    $get_user_query = 'SELECT * FROM tbl_user WHERE user_id = :id';
+    $get_user_set = $pdo->prepare($get_user_query);
+    $result = $get_user_set->execute(
+        array(
+            ':id'=>$user_id
+        )
+    );
+
+    if($result && $get_user_set->rowCount()){
+        return $get_user_set;
+    } else {
+        return false;
+    }
+}
