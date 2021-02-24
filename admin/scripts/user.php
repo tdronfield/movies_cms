@@ -55,7 +55,8 @@ function createUser($user_data)
     }
 }
 
-function getSingleUser($user_id){
+function getSingleUser($user_id)
+{
     ## Testing Line
     # echo 'You are trying to fetch user: '.$user_id;
     $pdo = Database::getInstance()->getConnection();
@@ -72,5 +73,34 @@ function getSingleUser($user_id){
         return $get_user_set;
     } else {
         return false;
+    }
+}
+
+function editUser($user_data)
+{
+    $pdo = Database::getInstance()->getConnection();
+
+    $update_user_query = 'UPDATE tbl_user SET user_fname = :fname, user_name = :username, user_pass = :password, user_email = :email, user_level = :user_level WHERE user_id = :id';
+    $update_user_set = $pdo->prepare($update_user_query);
+    $update_user_result = $update_user_set->execute(
+        array(
+            ':fname'=>$user_data['fname'],
+            ':username'=>$user_data['username'],
+            ':password'=>$user_data['password'],
+            ':email'=>$user_data['email'],
+            ':user_level'=>$user_data['user_level'],
+            ':id' => $user_data['id'],
+        )
+    );
+
+    // This is a debugging tool
+    // It will show you the SQL query you are attemping
+    // $update_user_set->debugDumpParams();
+    // exit;
+
+    if($update_user_result){
+        redirect_to('index.php');
+    } else {
+        return 'Guess you got canned..';
     }
 }
