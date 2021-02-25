@@ -9,6 +9,8 @@ if(empty($current_user)){
     $message = 'Failed to get user info';
 }
 
+// Double check here that user level editor cannot UPgrade their own user level
+// They should only be able to downgrade
 if(isset($_POST['submit'])){
     $data = array(
         'fname'=>trim($_POST['fname']),
@@ -16,11 +18,10 @@ if(isset($_POST['submit'])){
         'password'=>trim($_POST['password']),
         'email'=>trim($_POST['email']),
         'user_level'=>isCurrentUserAdminAbove()?trim($_POST['user_level']):'0',
-        'id' => $id,
-
+        'id'=>$id,
     );
 
-    $message = editUser($data); 
+    $message = editUser($data);
 }
 
 ?>

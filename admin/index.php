@@ -18,7 +18,6 @@ confirm_logged_in(); // Ensures only logged in users can access dashboard page
     <?php endif;?>
 
     <a href="admin_edituser.php">Edit User</a>
-
     <a href="admin_logout.php">Log Out</a>
 
 </body>
