@@ -28,7 +28,14 @@ function createUser($user_data)
     ## return var_export($user_data, true);
     ## When function runs, check parameters
 
-    ## TO DO:
+    # Validate username
+    # If field is empty
+    # Or user name exists
+    # Return - breaks function & does not create user
+    if(empty($user_data['username'])||doesUsernameExist($user_data['username'])) {
+        return 'Username is invalid!';
+    }
+
     ## 1. Run proper SQL query to insert user information to DB
     $pdo = Database::getInstance()->getConnection();
 
@@ -78,6 +85,14 @@ function getSingleUser($user_id)
 
 function editUser($user_data)
 {
+    # Validate username
+    # If field is empty
+    # Or user name exists
+    # Return - breaks function & does not create user
+    if(empty($user_data['username'])||doesUsernameExist($user_data['username'])) {
+        return 'Username is invalid!';
+    }
+    
     $pdo = Database::getInstance()->getConnection();
 
     $update_user_query = 'UPDATE tbl_user SET user_fname = :fname, user_name = :username, user_pass = :password, user_email = :email, user_level = :user_level WHERE user_id = :id';
@@ -112,7 +127,17 @@ function isCurrentUserAdminAbove()
     return !empty($_SESSION['user_level']);
 }
 
-// function doesUsernameExist()
-// {
+function doesUsernameExist($username)
+{
+    $pdo = Database::getInstance()->getConnection();
 
-// }
+    $user_exists_query = 'SELECT COUNT(*) FROM tbl_user WHERE user_name = :username';
+    $user_exists_set = $pdo->prepare($user_exists_query);
+    $user_exists_result = $user_exists_set->execute(
+        array(
+            ':username'=>$username
+        )
+    );
+
+    return !$user_exists_result || $user_exists_set->fetchColumn()>0;
+}
