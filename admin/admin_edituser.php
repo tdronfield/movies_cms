@@ -40,6 +40,9 @@ if(isset($_POST['submit'])){
 
     <?php echo !empty($message)?$message:'';?>
 
+    <a href="index.php">Back to Dashboard</a>
+
+
     <?php if (!empty($current_user)): ?>
     <form action="admin_edituser.php" method="POST">
     <!-- Use POST - do not show sensitive information in URL -->

@@ -28,6 +28,9 @@ if(isset($_POST['submit'])){
 <body>
     <h2>Create User</h2>
     <?php echo !empty($message)?$message:'';?>
+
+    <a href="index.php">Back to Dashboard</a>
+
     <form action="admin_createuser.php" method="POST">
     <!-- Use POST - do not show sensitive information in URL -->
         <label for="first_name">First Name</label> 

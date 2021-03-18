@@ -3,7 +3,7 @@
 function getAllMovies()
 {
     $pdo = Database::getInstance()->getConnection();
-    $queryAll = "SELECT * FROM tbl_movies";
+    $queryAll = "SELECT m.*, GROUP_CONCAT(g.genre_name) as genre_name FROM tbl_movies m NATURAL LEFT JOIN tbl_genre g NATURAL JOIN tbl_mov_genre GROUP BY m.movies_id";
     $runAll = $pdo->query($queryAll);
     $movies = $runAll->fetchAll(PDO::FETCH_ASSOC);
 

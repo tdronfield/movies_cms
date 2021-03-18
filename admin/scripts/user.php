@@ -83,6 +83,41 @@ function getSingleUser($user_id)
     }
 }
 
+function getAllUsers()
+{
+    $pdo = Database::getInstance()->getConnection();
+
+    $get_all_user_query = 'SELECT * FROM tbl_user';
+    $users = $pdo->query($get_all_user_query);
+
+    // If users returned in query, return in browser.
+    // Otherwise, return false
+    if($users){
+        return $users;
+    } else {
+        return false;
+    }
+}
+
+function deleteUser($user_id)
+{
+    $pdo = Database::getInstance()->getConnection();
+
+    $delete_user_query = 'DELETE FROM tbl_user WHERE user_id = :id';
+    $delete_user_set = $pdo->prepare($delete_user_query);
+    $delete_user_result = $delete_user_set->execute(
+        array(
+            ':id'=>$user_id
+        )
+    );
+
+    if($delete_user_result && $delete_user_set->rowCount()>0){
+        redirect_to('admin_deleteuser.php');
+    } else {
+        return false;
+    }
+}
+
 function editUser($user_data)
 {
     # Validate username
