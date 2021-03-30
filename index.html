@@ -13,17 +13,27 @@
     
             <ul class="filterNav">
     
-                <li><a href="">Action</a></li>
-                <li><a href="">Comedy</a></li>
-                <li><a href="">Family</a></li>
-                <li><a href="">Drama</a></li>
-                <li><a href="">All</a></li>
+                <li>
+                    <a @click.prevent="filterMovies('action')" href="">Action</a>
+                </li>
+                <li>
+                    <a @click.prevent="filterMovies('comedy')" href="">Comedy</a>
+                </li>
+                <li>
+                    <a @click.prevent="filterMovies('family')" href="">Family</a>
+                </li>
+                <li>
+                    <a @click.prevent="filterMovies('drama')" href="">Drama</a>
+                </li>
+                <li>
+                    <a @click.prevent="filterMovies('all')" href="">All</a>
+                </li>
     
             </ul>
         </header>
 
         <section>
-            <moviethumb v-for="(item, index_ in movies" :key="index" :movie="item"></moviethumb>
+            <moviethumb v-for="(item, index_ in filteredMovies" :key="index" :movie="item"></moviethumb>
         </section>
     </main>
 

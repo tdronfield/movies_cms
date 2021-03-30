@@ -1,7 +1,0 @@
-Admin VS Editor
-
-1. Restrict create user to admin only -> general or reuseable
-
-2. Redirect editor away from create user page -> reuseable
-
-3. Display user level in dashboard page
